@@ -1,2 +1,4 @@
 # Banking-System-integrated-with-Login-System
-Check README for faster login knowledge.
+When making login, use these data below:
+User: usuario
+Password: senha
