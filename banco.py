@@ -2,8 +2,14 @@ from datetime import datetime
 from funcoes import depositar,saque,saldo,extrato
 
 confirmation = input('Pressione ENTER para entrar no banco...')
+
 user = str(input('Usuário:'))
 password = str(input('Senha:'))
+
+while user != 'usuario' and password != 'senha':
+    print('Usuário ou senha incorretos, tente novamente.')
+    user = str(input('Usuário:'))
+    password = str(input('Senha:'))
 
 if user == 'usuario' and password == 'senha':
     with open('extratos.txt','a+', encoding='utf8') as archive:
@@ -39,7 +45,8 @@ if user == 'usuario' and password == 'senha':
                 saque(archive)
             
             elif option == 3:
-                saldo(archive)
+                total = saldo(archive)
+                print(f'Seu saldo é R${total:.2}.')
 
             elif option == 4:
                 extrato(archive)

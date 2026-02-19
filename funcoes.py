@@ -7,7 +7,7 @@ def depositar(archive):
     print('Digite o valor a ser depositado')
     value = float(input('>'))
     archive.write(f'1,{value},{operation_date}\n')
-    print(f'Depósito de R${value} realizado com sucesso.')
+    print(f'Depósito de R${value:.2} realizado com sucesso.')
 
 def saque(archive):
     # função de saque
@@ -15,8 +15,12 @@ def saque(archive):
     operation_date = datenow.strftime('%d/%m/%Y %H:%M:%S')
     print('Digite o valor a ser sacado')
     value = float(input('>'))
-    archive.write(f'2,{value},{operation_date}\n')
-    print(f'Saque de R${value} realizado com sucesso.')
+    total = saldo(archive)
+    if value > total:
+        print('Saldo insuficiente para operação.')
+    else:
+        archive.write(f'2,{value},{operation_date}\n')
+        print(f'Saque de R${value:.2} realizado com sucesso.')
 
 def saldo(archive):
     # função de exibir saldo
@@ -32,7 +36,7 @@ def saldo(archive):
             total -= value
         else:
             break
-        print(f'Seu saldo é R${total}.')
+    return total
 
 def extrato(archive):
     # função de imprimir extrato
